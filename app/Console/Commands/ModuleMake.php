@@ -282,26 +282,27 @@ class ModuleMake extends Command
         return $paths;
     }
 
-    private function getControllerPath($argument): string
+    private function getControllerPath($argument)
     {
         $controller = Str::studly(class_basename($argument));
         return $this->laravel['path'].'/Modules/'.str_replace('\\', '/', $argument)."/Controllers/"."{$controller}Controller.php";
 
     }
 
-    private function getApiControllerPath($name): string
+    private function getApiControllerPath($name)
     {
         $controller = Str::studly(class_basename($name));
         return $this->laravel['path'].'/Modules/'.str_replace('\\', '/', $name)."/Controllers/Api/"."{$controller}Controller.php";
 
     }
 
-    private function makeDirectory($path): void
+    private function makeDirectory($path)
     {
         if (! $this->files->isDirectory(dirname($path))) {
             $this->files->makeDirectory(dirname($path), 0777, true, true);
         }
 
+        return $path;
     }
 
     private function createRoutes(String $controller, String $modelName) : void
